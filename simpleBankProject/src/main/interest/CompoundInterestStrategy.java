@@ -3,11 +3,9 @@ import account.InterestBearing;
 
 public class CompoundInterestStrategy implements InterestBearing{
     private double rate;
-    private final int numPeriods;
 
-    public CompoundInterestStrategy(double rate, int numPeriods) {
+    public CompoundInterestStrategy(double rate) {
         this.rate = rate;
-        this.numPeriods = numPeriods;
     }
     @Override
     public void setInterestRate(double rate) {
@@ -20,15 +18,11 @@ public class CompoundInterestStrategy implements InterestBearing{
     @Override
     public double calculateInterest(double balance) {
         // calculate interest for a single compounding period
-        return balance * Math.pow(1 + this.rate / this.numPeriods, 1) - balance;
+        return balance * Math.pow(1 + this.rate / 12, (1 / 12) * 12) - balance;
     }
     @Override
     public double calculateYearlyYield(double balance) {
         // calculate interest compounded over a full year
-        return balance * Math.pow(1 + this.rate / this.numPeriods, this.numPeriods) - balance;
+        return balance * Math.pow(1 + this.rate / 12, 12) - balance;
     }
-    public int getNumPeriods() {
-        return this.numPeriods;
-    }
-
 }
