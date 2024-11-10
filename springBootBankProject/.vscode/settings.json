@@ -1,0 +1,14 @@
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.home": "/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home",  // Ensure this path matches your JDK 21 installation
+    "java.errors.incompleteClasspath.severity": "warning",
+    "java.jdt.ls.vmargs": "-Xms128m -Xmx1g",  // Adjusts Java Language Server memory settings
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "target/**/*.jar"
+    ],
+    "cSpell.words": [
+        "financeinstitution"
+    ]
+}
