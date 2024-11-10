@@ -1,10 +1,15 @@
 {
-    "java.project.sourcePaths": ["src/main"],
+    "java.project.sourcePaths": [
+        "src/main",
+        "src/Demo"
+    ],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
         "lib/**/*.jar"
     ],
     "cSpell.words": [
         "journaled"
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.compile.nullAnalysis.mode": "automatic"
 }
