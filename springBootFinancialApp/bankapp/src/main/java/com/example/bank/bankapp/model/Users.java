@@ -1,4 +1,5 @@
-package com.example.financeinstitution.model;
+package com.example.bank.bankapp.model;
+
 import java.time.LocalDateTime;
 
 public class Users {
@@ -22,50 +23,45 @@ public class Users {
         this.phone_number = phone_number;
         this.created_at = created_at;
     }
-    public Long getUserId() {
-        return this.user_id;
+    public Long getId() {
+    	return this.user_id;
     }
     public String getName() {
-        return this.name;
+    	return this.name;
     }
     public String getEmail() {
-        return this.email;
+    	return this.email;
     }
     public String getPassword() {
-        return this.password;
+    	return this.password;
     }
     public String getPhoneNumber() {
-        return this.phone_number;
+    	return this.phone_number;
     }
     public LocalDateTime getCreatedAt() {
-        return this.created_at;
-    }
-    public void setUserId(Long userId) {
-        this.user_id = userId;
+    	return this.created_at;
     }
     public void setName(String name) {
-        this.name = name;
-    }
-    public void setEmail(String email) {
-        this.email = email;
+    	this.name = name;
     }
     public void setPassword(String password) {
-        this.password = password;
+    	this.password = password;
     }
-    public void setPhoneNumber(String phoneNumber) {
-        this.phone_number = phoneNumber;
+    public void setPhoneNumber(String phone_number) {
+    	this.phone_number = phone_number;
     }
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.created_at = createdAt;
+    public void setCreatedAt(LocalDateTime timestamp) {
+    	this.created_at = timestamp;
     }
     @Override
     public String toString() {
-        return "User{" +
-                "userId=" + this.user_id +
-                ", name='" + this.name + '\'' +
-                ", email='" + this.email + '\'' +
-                ", phoneNumber='" + this.phone_number + '\'' +
-                ", createdAt=" + this.created_at +
-                '}';
+    	return "Users{" +
+    			"user_id=" + this.user_id +
+    			", name=" + this.name +
+    			", email=" + this.email +
+    			", phoneNumber=" + this.phone_number +
+    			", createdAt=" + this.created_at +
+    			'}';
     }
+    
 }

@@ -1,4 +1,4 @@
-package com.example.financeinstitution.model;
+package com.example.bank.bankapp.model;
 import java.time.LocalDateTime;
 
 public class Notifications {
@@ -30,7 +30,7 @@ public class Notifications {
     public String getNotificationType() {
         return this.notification_type;
     }
-    public LocalDateTime getTimestamp() {
+    public LocalDateTime getTimeStamp() {
         return this.timestamp;
     }
     public void setId(Long id) {
@@ -45,7 +45,7 @@ public class Notifications {
     public void setNotificationType(String notification_type) {
         this.notification_type = notification_type;
     }
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimeStamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
     @Override
