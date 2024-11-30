@@ -2,7 +2,7 @@ package com.example.bank.bankapp.model;
 
 import java.time.LocalDateTime;
 
-public class Users {
+public class User {
     private Long user_id;
     private String name;
     private String email;
@@ -12,10 +12,10 @@ public class Users {
 
     // we create an empty constructor so that the framework can instantiate the object
     // and set fields based on database query results
-    public Users() {
+    public User() {
 
     }
-    public Users(Long user_id, String name, String email, String password, String phone_number, LocalDateTime created_at) {
+    public User(Long user_id, String name, String email, String password, String phone_number, LocalDateTime created_at) {
         this.user_id = user_id;
         this.name = name;
         this.email = email;
@@ -41,8 +41,15 @@ public class Users {
     public LocalDateTime getCreatedAt() {
     	return this.created_at;
     }
+	public void setId(Long id) {
+		this.user_id = id;
+	}
+    
     public void setName(String name) {
     	this.name = name;
+    }
+    public void setEmail(String email) {
+    	this.email = email;
     }
     public void setPassword(String password) {
     	this.password = password;
@@ -63,5 +70,4 @@ public class Users {
     			", createdAt=" + this.created_at +
     			'}';
     }
-    
 }
