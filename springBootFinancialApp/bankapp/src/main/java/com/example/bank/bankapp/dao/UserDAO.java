@@ -21,7 +21,7 @@ public class UserDAO {
 	// CREATE a new User
 	public boolean createUser(User user) throws SQLException {
 		// omit setting the userID because the data will handle this as a serial field
-		String sql = "INSERT INTO users (name, email, password, phone_number) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO users (name, email, password, phone_number, role_id) VALUES (?, ?, ?, ?, ?)";
 		String hashedPassword = PasswordUtil.hashPassword(user.getPassword()); // hash the password
 		System.out.println("Database URL: " + jdbcTemplate.getDataSource().getConnection().getMetaData().getURL());
 		System.out.println("Database User: " + jdbcTemplate.getDataSource().getConnection().getMetaData().getUserName());
@@ -30,7 +30,8 @@ public class UserDAO {
 				user.getName(),
 				user.getEmail(),
 				hashedPassword,
-				user.getPhoneNumber()
+				user.getPhoneNumber(),
+				user.getRole()
 		);
 		return rowsInserted > 0;
 	}
@@ -44,9 +45,14 @@ public class UserDAO {
 		String sql = "SELECT * FROM users WHERE email = ?";
 		return jdbcTemplate.queryForObject(sql, new UserRowMapper(), email);
 	}
+	// (READ) Retrieve a User's role
+	public String getUserRole(Long userId) {
+		String sql = "SELECT r.name FROM roles r INNER JOIN users u ON r.id = u.role_id WHERE u.user_id = ?";
+		return jdbcTemplate.queryForObject(sql, String.class, userId);
+	}
 	// (UPDATE) Update User data
 	public boolean updateUserData(User user) {
-		String sql = "UPDATE users SET name = ?, phone_number = ?, email = ? WHERE id = ?";
+		String sql = "UPDATE users SET name = ?, phone_number = ?, email = ? WHERE user_id = ?";
 		int rowsUpdated = jdbcTemplate.update(
 				sql,
 				user.getName(),
@@ -84,6 +90,7 @@ public class UserDAO {
 			user.setEmail(resultSet.getString("email"));
 			user.setPassword(resultSet.getString("password"));
 			user.setPhoneNumber(resultSet.getString("phone_number"));
+			user.setRoleId(resultSet.getLong("role_id"));
 			
 			java.sql.Timestamp timestamp = resultSet.getTimestamp("created_at");
 			if (timestamp != null) {

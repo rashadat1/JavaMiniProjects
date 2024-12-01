@@ -9,19 +9,21 @@ public class User {
     private String password;
     private String phone_number;
     private LocalDateTime created_at;
+    private Long role_id;
 
     // we create an empty constructor so that the framework can instantiate the object
     // and set fields based on database query results
     public User() {
 
     }
-    public User(Long user_id, String name, String email, String password, String phone_number, LocalDateTime created_at) {
+    public User(Long user_id, String name, String email, String password, String phone_number, LocalDateTime created_at, Long role_id) {
         this.user_id = user_id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.phone_number = phone_number;
         this.created_at = created_at;
+        this.role_id = role_id;
     }
     public Long getId() {
     	return this.user_id;
@@ -40,6 +42,9 @@ public class User {
     }
     public LocalDateTime getCreatedAt() {
     	return this.created_at;
+    }
+    public Long getRole() {
+    	return this.role_id;
     }
 	public void setId(Long id) {
 		this.user_id = id;
@@ -60,6 +65,9 @@ public class User {
     public void setCreatedAt(LocalDateTime timestamp) {
     	this.created_at = timestamp;
     }
+    public void setRoleId(Long roleId) {
+    	this.role_id = roleId;
+    }
     @Override
     public String toString() {
     	return "Users{" +
@@ -68,6 +76,7 @@ public class User {
     			", email=" + this.email +
     			", phoneNumber=" + this.phone_number +
     			", createdAt=" + this.created_at +
+    			", roleId=" + this.role_id + 
     			'}';
     }
 }
