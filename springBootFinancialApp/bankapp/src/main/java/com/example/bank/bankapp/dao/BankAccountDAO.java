@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.example.bank.bankapp.model.BankAccount;
-import com.example.bank.bankapp.dao.UserDAO;
 
 @Repository
 public class BankAccountDAO {
@@ -82,5 +81,39 @@ public class BankAccountDAO {
 		String sql = "UPDATE bank_account SET overdraft_limit = ? WHERE id = ?";
 		int rowsUpdated = jdbcTemplate.update(sql, newOverdraftLimit, accountId);
 		return rowsUpdated > 0;
+	}
+	// Delete bank account by ID
+	public boolean deleteAccountById(Long id) {
+		String sql = "DELETE FROM bank_accounts WHERE id = ?";
+		int rowsDeleted = jdbcTemplate.update(sql,id);
+		return rowsDeleted > 0;
+	}
+	// Delete all accounts for a user
+	public boolean deleteAllAccountsForUser(Long user_id) {
+		String sql = "DELETE FROM bank_accounts WHERE user_id = ?";
+		int rowsDeleted = jdbcTemplate.update(sql, user_id);
+		return rowsDeleted > 0;
+	}
+	// RowMapper for mapping ResultSet rows to BankAccount objects
+	private static class BankAccountRowMapper implements RowMapper<BankAccount> {
+		@Override
+		// mapRow method is called once for each row in the ResultSet by the jdbcTemplate.query() method
+		// each call creates a BankAccount object and they are collected into a List
+		public BankAccount mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+			BankAccount bankAccount = new BankAccount();
+			bankAccount.setId(resultSet.getLong("id"));
+			bankAccount.setUserId(resultSet.getLong("user_id"));
+			bankAccount.setAccountNumber(resultSet.getString("account_number"));
+			bankAccount.setBalance(resultSet.getBigDecimal("balance"));
+			bankAccount.setInterestRate(resultSet.getBigDecimal("interest_rate"));
+			bankAccount.setOverdraftLimit(resultSet.getBigDecimal("overdraft_limit"));
+			bankAccount.setAccountType(resultSet.getString("account_type"));
+			
+			java.sql.Timestamp timestamp = resultSet.getTimestamp("created_at");
+			if (timestamp != null) {
+				bankAccount.setCreatedAt(timestamp.toLocalDateTime()); 
+			}
+			return bankAccount;
+		}
 	}
 }
