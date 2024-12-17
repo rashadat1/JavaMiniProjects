@@ -40,5 +40,28 @@ public class ToDoList {
 	}
 	
 	// Getters and Setters
-	
+	public Users getUser() {
+		return this.user;
+	}
+	public String getTitle() {
+		return this.title;
+	}
+	public String getDescription() {
+		return this.description;
+	}
+	public LocalDateTime getDueDate() {
+		return this.due_date;
+	}
+	public void setUser(Users user) {
+		this.user = user;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public void setDueDate(LocalDateTime due_date) {
+		this.due_date = due_date;
+	}
 }
